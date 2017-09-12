@@ -3,23 +3,24 @@
  *
  * @type {exports}
  */
+'use strict';
 
 const Hapi = require('hapi');
 const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
 
-var modules = require('./modules');
+const modules = require('./modules');
 
 // Instantiate the server
-var server = new Hapi.Server();
+const server = new Hapi.Server();
 const port = process.env.PORT || 3000;
 
 server.connection({
     host: '127.0.0.1',
     port: port,
     routes: {
-        cors: true,
+        cors: true
     }
 });
 
@@ -27,17 +28,17 @@ server.connection({
 /**
  * The hapijs plugins that we want to use and their configs
  */
- var plugins = [
-  Inert,
-  Vision,
-  {
-    register: HapiSwagger,
-    options: {
-        info : {
-            version: '0.1'
+const plugins = [
+    Inert,
+    Vision,
+    {
+        register: HapiSwagger,
+        options: {
+            info : {
+                version: '0.1'
+            }
         }
     }
-  }
 ];
 
 /**
@@ -46,30 +47,30 @@ server.connection({
 server.register(plugins, err => {
 
   // If there is an error on server startup
-  if(err) {
-    throw err;
-  }
+    if (err) {
+        throw err;
+    }
 
   /**
    * Make sure if this script is being required as a module by another script, we don't start the server.
    */
-  if(!module.parent) {
+    if (!module.parent) {
 
-    /**
-     * Starts the server
-     */
-    server.start( () => {
-      console.log('Hapi server started @', server.info.uri);
-    });
-  }
+      /**
+       * Starts the server
+       */
+        server.start( () => {
+            console.log('Hapi server started @', server.info.uri);
+        });
+    }
 
 });
 
 /**
  * Add all the modules within the modules folder
  */
-for(var route in modules) {
-  server.route(modules[route]);
+for (const route in modules) {
+    server.route(modules[route]);
 }
 
 

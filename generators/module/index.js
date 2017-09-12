@@ -46,7 +46,8 @@ var ModuleGenerator = yeoman.generators.Base.extend({
 		this.pluralName = inflection.pluralize( this.name );
 		this.daoName = inflection.camelize( this.name, true ) + 'Dao';
 		this.controllerName = inflection.camelize( this.name, true ) + 'Controller';
-
+    this.modelName = inflection.camelize( this.name, true );
+    
 		// Create the modules directory if it doesn't already exist
 		if (!fs.existsSync(modulesDir)) {
 			fs.mkdirSync(modulesDir, function (err) {
@@ -76,9 +77,10 @@ var ModuleGenerator = yeoman.generators.Base.extend({
 		// Copy the template files with the correct name
     var newBaseFileName = path.join(newModuleDir, this.name);
     this.mkdir('modules');
-		this.copy('module-ctrl.js', path.resolve(newBaseFileName + '-ctrl.js'));
-		this.copy('module-dao.js', path.resolve(newBaseFileName + '-dao.js'));
-		this.copy('module-test.js', path.resolve(newBaseFileName + '-test.js'));
+		this.copy('module-ctrl.js', path.resolve(newModuleDir + path.sep + 'controller.js'));
+    this.copy('module-dao.js', path.resolve(newModuleDir + path.sep + 'dao.js'));
+    this.copy('module-model.js', path.resolve(newModuleDir + path.sep + 'model.js'));
+		this.copy('module-test.js', path.resolve(newModuleDir + path.sep + 'test.js'));
 		this.copy('module-routes.js', path.resolve(newModuleDir + path.sep + 'routes.js'));
 	}
 });

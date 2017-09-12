@@ -5,34 +5,36 @@
  *
  * @type {exports}
  */
-var path = require('path');
-var fs = require('fs');
-var _ = require('underscore');
+'use strict';
 
-fs.readdirSync(__dirname).forEach(function (dir) {
+const path = require('path');
+const fs = require('fs');
+const _ = require('underscore');
+
+fs.readdirSync(__dirname).forEach(function(dir) {
 	/* If its the current file ignore it */
-	if (dir === 'index.js') return;
+    if (dir === 'index.js') {return;}
 
-	var currentDir = path.join(__dirname, dir);
-	var stat = fs.statSync(currentDir);
+    const currentDir = path.join(__dirname, dir);
+    const stat = fs.statSync(currentDir);
 
 	// If we're on a directory
-	if (stat && stat.isDirectory()) {
+    if (stat && stat.isDirectory()) {
 
-		fs.readdirSync(currentDir).forEach(function (file) {
+        fs.readdirSync(currentDir).forEach(function(file) {
 
-			// Only process *-test.js files...
-			if (file.indexOf('routes.js') >= 0) {
+          // Only process *-test.js files...
+            if (file.indexOf('routes.js') >= 0) {
 
-				/* Prepare empty object to store module */
-				var mod = {};
+                /* Prepare empty object to store module */
+                const mod = {};
 
-				/* Store module with its name (from filename) */
-				mod[path.basename(file, '.js')] = require(path.join(currentDir, file));
+                    /* Store module with its name (from filename) */
+                mod[path.basename(file, '.js')] = require(path.join(currentDir, file));
 
-				/* Extend module.exports (in this case - undescore.js, can be any other) */
-				_.extend(module.exports, mod);
-			}
-		});
-	}
+                    /* Extend module.exports (in this case - undescore.js, can be any other) */
+                _.extend(module.exports, mod);
+            }
+        });
+    }
 });

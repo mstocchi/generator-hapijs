@@ -1,0 +1,43 @@
+{
+  "extends": [
+      "eslint:recommended",
+      "eslint-config-hapi",
+      "plugin:node/recommended",
+      "hapi"
+  ],
+  "plugins": [
+      "promise",
+      "node"
+  ],
+  "parserOptions": {
+      "ecmaVersion": 6
+  },
+  "env": {
+      "node": true,
+      "es6": true
+  },
+  "rules": {
+      "promise/always-return": "off",
+      "promise/no-return-wrap": "error",
+      "promise/param-names": "error",
+      "promise/catch-or-return": "off",
+      "promise/no-native": "off",
+      "promise/no-nesting": "warn",
+      "promise/no-promise-in-callback": "warn",
+      "promise/no-callback-in-promise": "warn",
+      "promise/avoid-new": "off",
+      "node/exports-style": ["error", "module.exports"],
+      "node/no-unpublished-require": ["error", {
+          "allowModules": ["code", "lab", "request"]
+      }],
+      "hapi/hapi-capitalize-modules": "off",
+      "hapi/hapi-scope-start": "off",
+      "func-style": "off",
+      "space-before-function-paren": ["error", "never"],
+      "prefer-arrow-callback": "off",
+      "arrow-parens": ["error", "as-needed"],
+      "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+      "object-shorthand": [2, "consistent"],
+      "consistent-this": "off"
+  }
+}

@@ -5,7 +5,9 @@
  *
  * @type {exports}
  */
-var Boom = require('boom');
+'use strict';
+
+const Boom = require('boom');
 
 /**
  * Creates a <%= name %>

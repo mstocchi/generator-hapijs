@@ -5,8 +5,10 @@
  *
  * @type {<%= name %>Dao|exports}
  */
-var <%= daoName %> = require('./<%= name %>-dao');
-var Boom = require('boom');
+'use strict';
+
+const <%= daoName %> = require('./dao');
+const Boom = require('boom');
 
 /**
  * Creates a <%= name %>

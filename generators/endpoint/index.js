@@ -127,9 +127,9 @@ exports." + this.handler + " = function(callback) {\n\
 ";
 
 		// TODO: Refactor this into method and figure out how to get endpoint comma to start after last endpoint and not two lines past it
-		var routePath = path.resolve(process.cwd(), 'modules', pluralModule, module + "-routes.js");
-		var ctrlPath = path.resolve(process.cwd(), 'modules', pluralModule, module + "-ctrl.js");
-		var daoPath = path.resolve(process.cwd(), 'modules', pluralModule, module + "-dao.js");
+		var routePath = path.resolve(process.cwd(), 'modules', pluralModule, "routes.js");
+		var ctrlPath = path.resolve(process.cwd(), 'modules', pluralModule, "controller.js");
+		var daoPath = path.resolve(process.cwd(), 'modules', pluralModule, "dao.js");
 		var routeSrc = fs.readFileSync(routePath, 'utf8');
 		var ctrlSrc = fs.readFileSync(ctrlPath, 'utf8');
 		var daoSrc = fs.readFileSync(daoPath, 'utf8');

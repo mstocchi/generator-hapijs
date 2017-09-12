@@ -6,9 +6,11 @@
  * @type {exports}
  */
 
-var Lab = require('lab');
-var server = require('../../server');
-var lab = exports.lab = Lab.script();
+'use strict';
+
+const Lab = require('lab');
+const server = require('../../server');
+const lab = exports.lab = Lab.script();
 
 /**
  * All the tests related to tasks
@@ -24,8 +26,8 @@ lab.experiment('Creating <%= name %>', function() {
       }
     };
 
-    server.inject(options, function (response) {
-      var result = response.result;
+    server.inject(options,  response =>  {
+      let result = response.result;
 
       Lab.expect(response.statusCode).to.equal(200);
 
