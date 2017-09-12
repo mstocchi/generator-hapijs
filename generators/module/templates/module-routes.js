@@ -15,7 +15,21 @@ module.exports = function() {
       path: '/<%= pluralName %>',
       config: {
         description: 'Creates a <%= name %>',
+        notes: 'Creates a <%= name %>',
+        tags: ['api', 'create'],
         handler: <%= controllerName %>.create,
+        plugins: {
+          'hapi-swagger': {
+              responses: {
+                  '201': {
+                      'description': 'Created'
+                  },
+                  '400': {
+                      'description': 'Bad Request'
+                  }
+              }
+          }
+        },
         validate: {
           payload: {
             // TODO: Add some validations
@@ -29,7 +43,27 @@ module.exports = function() {
       path: '/<%= pluralName %>',
       config : {
         description: 'Fetches all <%= pluralName %>',
-        handler: <%= controllerName %>.find
+        handler: <%= controllerName %>.find,
+        notes: 'Fetches all <%= pluralName %>',
+        tags: ['api', 'query'],
+        plugins: {
+          'hapi-swagger': {
+            responses: {
+              '200': {
+                  'description': 'Success'
+              },
+              '400': {
+                  'description': 'Bad Request'
+              },
+              '405': {
+                  'description': 'Method Not Allowed'
+              }
+            }
+          }
+        },
+        validate: {
+          // TODO: Add some validations
+        }
       }
     },
 		
@@ -39,6 +73,20 @@ module.exports = function() {
       config : {
         description: 'Fetches a <%= name %> by id',
         handler: <%= controllerName %>.findById,
+        notes: 'Fetches a <%= name %> by id',
+        tags: ['api', 'query'],
+        plugins: {
+          'hapi-swagger': {
+              responses: {
+                  '200': {
+                      'description': 'Success'
+                  },
+                  '400': {
+                      'description': 'Bad Request'
+                  }
+              }
+          }
+        },
         validate: {
           params: {
             id: Joi.number().integer().required()
@@ -53,6 +101,20 @@ module.exports = function() {
       config : {
         description: 'Updates a <%= name %> for a specific id',
         handler: <%= controllerName %>.update,
+        notes: 'Updates a <%= name %> for a specific id',
+        tags: ['api', 'update'],
+        plugins: {
+            'hapi-swagger': {
+                responses: {
+                    '200': {
+                        'description': 'Success'
+                    },
+                    '400': {
+                        'description': 'Bad Request'
+                    }
+                }
+            }
+        },
         validate: {
           params: {
             id: Joi.number().integer().required()
@@ -70,6 +132,20 @@ module.exports = function() {
       config : {
         description: 'Remove a <%= name %> for a specific id',
         handler: <%= controllerName %>.remove,
+        notes: 'BACKOFFICE ONLY - Permit to delete a parent object by its identifier',
+        tags: ['api', 'delete'],
+        plugins: {
+          'hapi-swagger': {
+              responses: {
+                  '204': {
+                      'description': 'No Content'
+                  },
+                  '405': {
+                      'description': 'Method Not Allowed'
+                  }
+              }
+          }
+        },
         validate: {
           params: {
             id: Joi.number().integer().required()

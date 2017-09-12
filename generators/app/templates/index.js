@@ -1,5 +1,5 @@
 /**
- * This file just loads all the *-routes.js files in any /modules/<subdir>.
+ * This file just loads all the *routes.js files in any /modules/<subdir>.
  *
  * This allows us to just require the /modules folder and it will load all the *-routes.js files in the subfolders.
  *
@@ -22,7 +22,7 @@ fs.readdirSync(__dirname).forEach(function (dir) {
 		fs.readdirSync(currentDir).forEach(function (file) {
 
 			// Only process *-test.js files...
-			if (file.indexOf('-routes.js') > 0) {
+			if (file.indexOf('routes.js') >= 0) {
 
 				/* Prepare empty object to store module */
 				var mod = {};

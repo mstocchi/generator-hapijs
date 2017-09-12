@@ -4,14 +4,20 @@
  * @type {exports}
  */
 
-var Hapi = require('hapi');
+const Hapi = require('hapi');
+const Inert = require('inert');
+const Vision = require('vision');
+const HapiSwagger = require('hapi-swagger');
+
 var modules = require('./modules');
 
 // Instantiate the server
 var server = new Hapi.Server();
+const port = process.env.PORT || 3000;
 
 server.connection({
-    port: 3000,
+    host: '127.0.0.1',
+    port: port,
     routes: {
         cors: true,
     }
@@ -21,17 +27,23 @@ server.connection({
 /**
  * The hapijs plugins that we want to use and their configs
  */
-// TODO: Implement ability to add plugins via generator
  var plugins = [
-//   {
-//     plugin: require('lout')
-//   }
- ];
+  Inert,
+  Vision,
+  {
+    register: HapiSwagger,
+    options: {
+        info : {
+            version: '0.1'
+        }
+    }
+  }
+];
 
 /**
  * Setup the server with plugins
  */
-server.register(plugins, function(err) {
+server.register(plugins, err => {
 
   // If there is an error on server startup
   if(err) {
@@ -46,7 +58,7 @@ server.register(plugins, function(err) {
     /**
      * Starts the server
      */
-    server.start(function () {
+    server.start( () => {
       console.log('Hapi server started @', server.info.uri);
     });
   }

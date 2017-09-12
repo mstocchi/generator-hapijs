@@ -2,7 +2,10 @@
   "name": "package",
   "version": "0.0.0",
   "dependencies": {
-		"hapi": "*",
+    "hapi": "*",
+    "hapi-swagger": "^7.7.1",
+    "inert": "^4.2.1",
+    "vision": "^4.1.1",
 		"joi": "*",
 		"boom": "*",
 		"underscore": "*"
