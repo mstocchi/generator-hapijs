@@ -11,6 +11,8 @@ const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
 
 const modules = require('./modules');
+const database = require('./database');
+
 
 // Instantiate the server
 const server = new Hapi.Server();
@@ -61,6 +63,9 @@ server.register(plugins, err => {
        */
         server.start( () => {
             console.log('Hapi server started @', server.info.uri);
+            if (database) {
+                console.log('Database connected');
+            }
         });
     }
 

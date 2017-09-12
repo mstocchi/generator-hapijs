@@ -16,7 +16,7 @@ const Boom = require('boom');
  * @param req
  * @param reply
  */
-exports.create = function (req, reply) {
+function create(req, reply) {
 
 	<%= daoName %>.create(req.payload, function (err, data) {
 		if (err) {
@@ -32,14 +32,13 @@ exports.create = function (req, reply) {
  * @param req
  * @param reply
  */
-exports.find = function (req, reply) {
 
-	<%= daoName %>.find(function (err, data) {
-		if (err) {
-			return reply(Boom.wrap(err));
-		}
-		reply(data);
-	});
+function find(req, reply) {
+  <%= daoName %>.findAll().then(data => {
+      reply(data);
+  }, function(err) {
+      return reply(Boom.wrap(err));
+  });
 };
 
 /**
@@ -48,7 +47,7 @@ exports.find = function (req, reply) {
  * @param req
  * @param reply
  */
-exports.findById = function (req, reply) {
+function findById(req, reply) {
 
 	<%= daoName %>.findById(req.params.id, function (err, data) {
 		if (err) {
@@ -64,7 +63,7 @@ exports.findById = function (req, reply) {
  * @param req
  * @param reply
  */
-exports.update = function (req, reply) {
+function update(req, reply) {
 
 	<%= daoName %>.update(req.params.id, req.payload, function (err, data) {
 		if (err) {
@@ -80,7 +79,7 @@ exports.update = function (req, reply) {
  * @param req
  * @param reply
  */
-exports.remove = function (req, reply) {
+function remove(req, reply) {
 
 	<%= daoName %>.remove(req.params.id, function (err, data) {
 		if (err) {
@@ -91,3 +90,10 @@ exports.remove = function (req, reply) {
 };
 
 /* Add new methods above */
+module.exports = {
+  create:create,
+  findById:findById,
+  update:update,
+  remove:remove,
+  find: find
+};

@@ -8,7 +8,7 @@
 'use strict';
 
 const Boom = require('boom');
-const Model = require('objection').Model;
+const Model = require('../../database').Model;
 
 class <%= modelName %> extends Model {
     static get tableName() {

@@ -8,6 +8,7 @@
 'use strict';
 
 const Boom = require('boom');
+const  <%= modelName %> = require('./model');
 
 /**
  * Creates a <%= name %>
@@ -25,10 +26,11 @@ exports.create = function (payload, callback) {
  *
  * @param callback
  */
-exports.find = function (callback) {
-	// TODO: Implement dao method and call callback(null, <data>)
-	return callback(Boom.notImplemented());
+
+function findAll() {
+  return <%= modelName %>.query();
 };
+
 
 /**
  * Get's a specific <%= name %> by the id
@@ -65,3 +67,7 @@ exports.remove = function (id, callback) {
 };
 
 /* Add new methods above */
+
+module.exports = {
+  findAll: findAll
+};
